@@ -1,0 +1,1144 @@
+searching............8 to 166
+sorting..............169 to 305
+file.................310 to 430
+datatype..............436 to 593
+crud..................598 to 764
+numpy..............767 to 935
+hackerrank.........938 to 1140
+
+
+searching:___________________
+
+Q1)
+
+Input 1 :
+5
+1 2 5 6 2
+2
+Output 1 :
+The index of the second occurrence of the key value is: 4
+Input 2 :
+4
+1 2 3 4
+8
+Output 2 :
+Key not found.
+Input 3 :
+4
+1 2 3 4
+1
+Output 3 :
+Key found only once.
+Fill your code here
+
+# You are using Python
+n=int(input())
+l=[]
+count=0
+n1=input()
+n1=n1.split()
+for i in range(n):
+    l.append(int(n1[i]))
+k=int(input())
+for i in range(n):
+    if(l[i]==k and count!=2):
+        count+=1
+        index=i
+if(count==0):
+    print("Key not found.")
+elif(count==1):
+    print("Key found only once.")
+else:
+    print("The index of the second occurrence of the key value is:",index)
+
+Q2)
+
+Input 1 :
+6
+0 3 5 9 12 15
+9
+Output 1 :
+Element 9 found at index 3
+Input 2 :
+6
+0 3 5 9 12 15
+2
+Output 2 :
+Element 2 not found in the array
+
+# You are using Python
+n=int(input())
+l=[]
+flag=0
+a=input()
+a=a.split()
+for i in range(n):
+    l.append(int(a[i]))
+k=int(input())
+for i in range(n):
+    if(l[i]==k):
+        print("Element",k,"found at index",i)
+        flag=1
+        break
+    else:
+        flag=0
+if(flag==0):
+    print("Element",k,"not found in the array")
+
+Q3)
+
+Input 1 :
+9
+1 1 2 3 3 4 4 8 8
+Output 1 :
+2
+Input 2 :
+7
+3 3 7 7 10 11 11
+Output 2 :
+10
+
+# You are using Python
+n=int(input())
+l=[]
+a=input()
+a=a.split()
+for i in range(n):
+    l.append(a[i])
+l1=[x for x in l if(l.count(x)==1)]
+for i in range(0,1):
+    print(l1[i])
+
+Q4)
+
+Input 1 :
+5
+1 2 3 1 1
+4
+Output 1 :
+3
+Input 2 :
+10
+1 2 3 4 5 6 7 8 9 10
+5
+Output 2 :
+15
+Input 3 :
+6
+3 2 2 4 1 4
+3
+Output 3 :
+6
+
+# You are using Python
+def ship_within_days(weights, days):
+    def count_days_required(capacity):
+        days_required = 1
+        current_capacity = 0
+
+        for weight in weights:
+            if current_capacity + weight > capacity:
+                days_required += 1
+                current_capacity = 0
+
+            current_capacity += weight
+
+        return days_required
+
+    left, right = max(weights), sum(weights)
+
+    while left < right:
+        mid = left + (right - left) // 2
+        required_days = count_days_required(mid)
+
+        if required_days <= days:
+            right = mid
+        else:
+            left = mid + 1
+
+    return left
+
+# Reading input
+n = int(input())
+weights = list(map(int, input().split()))
+days = int(input())
+
+# Output the result
+result = ship_within_days(weights, days)
+print(result)
+
+sorting:_____________________
+
+Q1)
+
+Input 1 :
+10
+1001 1110 1101 111011 110011 110101 1001010 10111 11011 11000
+Output 1 :
+1001 1101 1110 10111 11000 11011 110011 110101 111011 1001010
+
+# You are using Python
+n=int(input())
+l=[]
+a=input()
+a=a.split()
+for i in range(n):
+    l.append(int(a[i]))
+l.sort()
+for x in l:
+    print(x,end=" ")
+
+Q2)
+
+5
+4 7 8 5 1
+4
+Output 1 :
+7
+Input 2 :
+6
+9 6 3 1 8 5
+5
+Output 2 :
+8
+Input 3 :
+5
+1 4 5 7 13
+0
+Output 3 :
+Invalid value of K
+Input 4 :
+3
+1 2 5
+4
+Output 4 :
+Invalid value of K
+
+# You are using Python
+n=int(input())
+l=[]
+a=input()
+a=a.split()
+for i in range(n):
+    l.append(int(a[i]))
+k=int(input())
+if(k<=n and k!=0):
+    l.sort()
+    print(l[k-1])
+else:
+    print("Invalid value of K")
+
+Q3)
+
+5
+78 54 96 32 53
+Output 1 :
+32 53 54 78 96
+Input 2 :
+4
+53 65 84 36
+Output 2 :
+36 53 65 84
+
+# You are using Python
+def part(a, l, r):
+    p = a[l]
+    i, j = l, r
+
+    while i < j:
+        while i < r and a[i] <= p:
+            i += 1
+        while j > l and a[j] >= p:
+            j -= 1
+        if i < j:
+            a[i], a[j] = a[j], a[i]
+
+    a[l], a[j] = a[j], a[l]
+    return j
+
+def quick(a, l, r):
+    if l < r:
+        s = part(a, l, r)
+        quick(a, l, s - 1)
+        quick(a, s + 1, r)
+
+n = int(input())
+a = []
+l = input()
+l = l.split()
+for i in range(n):
+    a.append(int(l[i]))
+
+quick(a, 0, n - 1)
+for x in a:
+    print(x,end=" ")
+
+Q4)
+
+Input 1 :
+4
+5 2 6 1
+Output 1 :
+2 1 1 0
+Input 2 :
+1
+-1
+Output 2 :
+0
+Input 3 :
+2
+-1 -1
+Output 3 :
+0 0
+
+# You are using Python
+n=int(input())
+l=[]
+a=input()
+a=a.split()
+for i in range(n):
+    l.append(int(a[i]))
+for i in range(n):
+    count=0
+    for j in range(i+1,n):
+        if(l[j]<l[i]):
+            count+=1
+    print(count,end=" ")
+
+file:______________________
+
+Q1)
+
+Input 1 :
+5
+84
+65
+53
+40
+20
+Output 1 :
+84
+20
+
+# You are using Python
+def write_array_to_file(filename, arr):
+    with open(filename, 'w') as file:
+        for element in arr:
+            file.write(str(element) + '\n')
+
+def find_max_min(arr):
+    if not arr:
+        return None, None  # Return None for both max and min if the array is empty
+    max_element = max(arr)
+    min_element = min(arr)
+    return max_element, min_element
+
+# Input the size of the array
+n = int(input())
+# Input array elements
+array_elements = [int(input()) for _ in range(n)]
+
+# Write array elements to the file "input1.txt"
+write_array_to_file("input1.txt", array_elements)
+
+# Find maximum and minimum elements
+max_element, min_element = find_max_min(array_elements)
+
+# Output the results
+print(max_element)
+print(min_element)
+
+Q2)
+
+Input 1 :
+I Like program
+Output 1 :
+(' ', 2) ('I', 1) ('L', 1) ('a', 1) ('e', 1) ('g', 1) ('i', 1) ('k', 1) ('m', 1) ('o', 1) ('p', 1) ('r', 2)
+Input 2 :
+Enjoy every moment
+Output 2 :
+(' ', 2) ('E', 1) ('e', 3) ('j', 1) ('m', 2) ('n', 2) ('o', 2) ('r', 1) ('t', 1) ('v', 1) ('y', 2)
+
+# You are using Python
+def count_character_frequency(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            data = file.read()
+
+            # Count the frequency of each character
+            frequency_dict = {}
+            for char in data:
+                if char.isalnum() or char.isspace():  # Consider alphanumeric characters and spaces
+                   
+                    frequency_dict[char] = frequency_dict.get(char, 0) + 1
+
+            # Sort the dictionary by keys
+            sorted_frequency = sorted(frequency_dict.items())
+
+            # Print the result
+            for item in sorted_frequency:
+                print(f"('{item[0]}', {item[1]})", end=' ')
+
+    except FileNotFoundError:
+        print("File not found.")
+
+# Example usage:
+file_path = "input.txt"  # Change this to the actual file path
+count_character_frequency(file_path)
+
+Q3)
+
+Input 1 :
+Python is a powerful and versatile programming language. Python is used for web development, data analysis, and more.
+Output 1 :
+'Python' with a count of 2
+The most frequent word have been written to 'output.txt'.
+Input 2 :
+Machine learning is a subset of artificial intelligence. It involves the use of algorithms to make predictions based on data. Deep learning, a subfield of machine learning, focuses on neural networks.
+Output 2 :
+'learning' with a count of 3
+The most frequent word have been written to 'output.txt'.
+
+from collections import Counter
+import re
+
+# Read the input text from the user
+text = input()
+
+# Use regular expressions to split the text into words
+words = re.findall(r'\b\w+\b', text)
+
+# Count word frequencies using Counter
+word_count = Counter(words)
+
+# Specify how many top words to consider
+top_n = 1  # Change this to any number you desire
+
+# Find the top N most frequent words and their counts
+most_common_words = word_count.most_common(top_n)
+
+#print(f"The top {top_n} most frequent words are:")
+for word, count in most_common_words:
+    print(f"'{word}' with a count of {count}")
+
+# Write the most frequent words to another file
+with open("output.txt", "w") as output_file:
+    output_file.write(f"The top {top_n} most frequent words are:\n")
+    for word, count in most_common_words:
+        output_file.write(f"'{word}' with a count of {count}\n")
+
+print(f"The most frequent word have been written to 'output.txt'.")
+
+datatype:___________________________
+
+Q1)
+
+Input 1 :
+Make today ridiculously amazing
+3
+Output 1 :
+('Make', 'today', 'amazing')
+
+s=input()
+s=s.split()
+tuplex = tuple(s)
+n=int(input())
+tuplex = tuplex[:n-1] + tuplex[n:]
+print(tuplex)
+
+Q2)
+
+Input 1 :
+2
+1 2
+3 4
+Output 1 :
+5
+Input 2 :
+3
+1 2 3
+4 5 6
+7 8 9
+Output 2 :
+15
+
+size = int(input())
+matrix = [[0] * size for row in range(0, size)]
+for x in range(0, size):
+
+    line = list(map(int, input().split()))
+
+    for y in range(0, size):
+        matrix[x][y] = line[y]
+
+matrix_sum_diagonal = sum(matrix[size - i - 1][size - i - 1] for i in range(size))
+print(matrix_sum_diagonal)
+
+Q3)
+
+Input 1 :
+3
+hello 12
+23 10
+world -5
+4
+hi 10
+33 1
+23 10
+hello 12
+Output 1 :
+{'world': -5}
+Input 2 :
+2
+apple 3
+orange 4
+2
+orange 4
+apple 3
+Output 2 :
+{}
+
+dict1 = {}
+n = int(input())
+for i in range(n):
+    key, value = input().split()
+    dict1[key] = int(value)
+
+dict2 = {}
+m = int(input())
+for i in range(m):
+    key, value = input().split()
+    dict2[key] = int(value)
+
+diff_dict = {}
+
+for key in dict1.keys():
+    if key not in dict2.keys():
+        diff_dict[key] = dict1[key]
+    elif dict1[key] != dict2[key]:
+        diff_dict[key] = dict1[key]
+
+for key in dict2.keys():
+    if key in diff_dict.keys():
+        del diff_dict[key]
+
+print(diff_dict)
+
+Q4)
+
+Input 1 :
+mango banana orange apple
+apple mango pomegranate guava
+Output 1 :
+['banana', 'guava', 'orange', 'pomegranate']
+Input 2 :
+aa bb pp
+cc hh uu
+Output 2 :
+['aa', 'bb', 'cc', 'hh', 'pp', 'uu']
+Input 3 :
+lion tiger giraffe zebra
+lion tiger zebra giraffe
+Output 3 :
+[]
+
+set1_inp = input().split()
+set2_inp = input(). split()
+set1 = set(set1_inp)
+set2 = set(set2_inp)
+setc = set1 ^ set2
+setc_list = list(setc)
+print(sorted(setc_list))
+
+Q5)
+
+Input 1 :
+10 8 12 'hello'
+'world' 'hello' 34 12 12
+Output 1 :
+{12: 3, 'hello': 2}
+Input 2 :
+'a' 'b' 'c' 'd'
+'A' 'B' 'C' 'D'
+Output 2 :
+{}
+
+list1 = input()
+list2 = input()
+
+list1 = list1.split()
+list2 = list2.split()
+
+common_dict = {}
+for elem in list1:
+    if elem in list2 and elem not in common_dict:
+ 
+        count1 = list1.count(elem)
+        count2 = list2.count(elem)
+       
+     
+        if elem.isdigit():
+            common_dict[int(elem)] = count1 + count2
+        else:
+            common_dict[elem] = count1 + count2
+
+print("{", end="")
+for key, value in common_dict.items():
+    if isinstance(key, int):
+        print(f"{key}: {value}", end="")
+    else:
+        print(f"{key}: {value}", end="")
+    if list(common_dict.keys())[-1] != key:
+        print(", ", end="")
+print("}")
+
+crud:_____________________________
+
+Q1)
+
+Input 1 : -------
+Output 1 :
+('Johns Hopkins', 2)
+('KMCH', 2)
+('RoyalCare', 2)
+('UCLA Medical Center', 3)
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost', 'rootuser', 'rootuser', 'rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery)
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+SqlQuery = "SELECT A.Hospital_Name, count(*) from Hospital A join Doctor B on A.Hospital_Id = B.Hospital_Id group by B.Hospital_Id order by 1;"
+getResult(SqlQuery)
+   
+Q2)
+
+Input 1 :-------
+Output 1 :
+(10, 20, 15, 'Yes')
+(13, 15, 30, 'No')
+(7, 10, 5, 'Yes')
+(1, 10, 12, 'No')
+(20, 20, 10, 'Yes')
+(10, 10, 40, 'No')
+(20, 10, 10, 'No')
+(5, 5, 40, 'No')
+(90, 10, 40, 'No')
+(15, 10, 15, 'Yes')
+(30, 30, 30, 'Yes')
+(60, 60, 60, 'Yes')
+(70, 10, 40, 'No')
+(80, 15, 30, 'No')
+(10, 10, 40, 'No')
+(10, 10, 40, 'No')
+(15, 25, 40, 'No')
+(65, 35, 40, 'Yes')
+(100, 100, 40, 'Yes')
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost', 'rootuser', 'rootuser', 'rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery)
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+SqlQuery = "SELECT x,y,z,CASE WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes' ELSE 'No' END FROM triangles;"
+getResult(SqlQuery)
+   
+Q3)
+
+Input 1 :
+105
+Output 1 :
+('Hazel', 'Langenbasch')
+('Rajesh', 'A')
+('Srinivasan', 'K')
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost', 'rootuser', 'rootuser', 'rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,emp_id):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(emp_id))
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+emp_id = int(input())
+SqlQuery = "SELECT first_name, last_name  FROM employees WHERE salary < (SELECT salary from employees where employee_id = %s) order by 1,2;"
+getResult(SqlQuery,emp_id)
+   
+Q4)
+
+Input 1 :
+5
+Output 1 :
+('Lex', 'Greenberg', 30000.0)
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost', 'rootuser', 'rootuser', 'rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,n):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(n))
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+n = int(input())
+SqlQuery = "SELECT first_name, last_name, salary FROM employees WHERE salary = (SELECT distinct salary from employees e1 where %s = (select count(distinct salary) from employees e2 where e2.salary >= e1.salary)) ;"
+getResult(SqlQuery,n)
+   
+Q5)
+
+Input 1 :
+113
+Output 1 :
+('Natraj', 'S', 22000.0, 99, 'TECHSP')
+('Nike', 'Johnson', 20000.0, 99, 'TECHSP')
+('Rajesh', 'A', 25000.0, 99, 'TECHSP')
+('Srinivasan', 'K', 26000.0, 98, 'TECHSP')
+('Tom', 'Roosevelt', 23700.0, 98, 'TECHSP')
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost', 'rootuser', 'rootuser', 'rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,emp_id):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(emp_id))
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+emp_id = int(input())
+SqlQuery = "SELECT first_name, last_name, salary, department_id, job_id  FROM employees WHERE job_id = (SELECT job_id from employees where employee_id = %s) order by 1,2;"
+getResult(SqlQuery,emp_id)
+   
+numpy:__________________________________
+
+Q1)
+
+Input 1 :
+1 2 3 4 5 1 4 5 6 7 1 1 8 1
+1
+4
+Output 1 :
+11
+Input 2 :
+1 7 3 4 5 1 4 5 6 7 1 8 8 1
+1
+4
+Output 2 :
+13
+
+import numpy as np
+
+a = input().split()
+k = int(input())
+n = int(input())
+
+arr = np.array(a,int)
+
+print(np.where(arr == k)[0][n-1])
+
+Q2)
+
+Input 1 :
+3
+3
+12 10 14
+11 15 30
+34 56 7
+Output 1 :
+34
+
+#import numpy
+import numpy as np
+
+#User input
+m = int(input())
+n = int(input())
+
+list_array = []
+for i in range(0,m):
+    lst = input().split()
+    list_array.append(lst)
+
+arr = np.array(list_array, int)
+result = np.trace(arr)
+print(result)
+   
+Q3)
+
+Input 1 :
+python DBMS java C#
+Output 1 :
+['Python' 'Dbms' 'Java' 'C#']
+['python' 'dbms' 'java' 'c#']
+['PYTHON' 'DBMS' 'JAVA' 'C#']
+['PYTHON' 'dbms' 'JAVA' 'c#']
+Input 2 :
+Rose daisy marigold JASMINE
+Output 2 :
+['Rose' 'Daisy' 'Marigold' 'Jasmine']
+['rose' 'daisy' 'marigold' 'jasmine']
+['ROSE' 'DAISY' 'MARIGOLD' 'JASMINE']
+['rOSE' 'DAISY' 'MARIGOLD' 'jasmine']
+
+#import numpy
+import numpy as np
+
+#User input
+a = input().split()
+
+arr = np.array(a, str)
+
+print(np.char.capitalize(arr))
+
+print(np.char.lower(arr))
+
+print(np.char.upper(arr))
+
+print(np.char.swapcase(arr))
+
+Q4)
+
+Input 1 :
+11 22 33 44 55 66 77 88 99
+3
+3
+Output 1 :
+[[11 22 33]
+ [44 55 66]
+ [77 88 99]]
+Input 2 :
+1 2 3 4
+2
+2
+Output 2 :
+[[1 2]
+ [3 4]]
+
+import numpy as np
+
+a = input().split()
+m = int(input())
+n = int(input())
+
+
+arr = np.array(a,int)
+
+x = np.reshape(arr,(m,n))
+print(x)
+
+Q5)
+
+Input 1 :
+8 5 1 2 2 3 7 1 9 0 3
+8 1 0 6 7 6 4 1 0 0 8
+Output 1 :
+[0 1 7 8]
+Input 2 :
+1 1 2 3 4
+2 1 4 6
+Output 2 :
+[1 2 4]
+
+#Importing numpy
+import numpy as np
+
+#User Input
+a1 = input().split()
+b1 = input().split()
+
+a = np.array(a1,int)
+b = np.array(b1,int)
+
+
+
+#numpy.intersect1d() function find the intersection of two arrays
+#and return the sorted, unique values that are in both of the input arrays.
+
+print(np.intersect1d(a,b))
+
+Q6)
+
+Input 1 :
+1 2 3 4 5 6 7 8 9 10 11 12 13
+Output 1 :
+[ 1  3  5  7  9 11 13]
+Input 2 :
+11 12 13 14 15 16 16 17 18 19
+Output 2 :
+[11 13 15 17 19]
+
+#Importing numpy
+import numpy as np
+
+#User input
+inp = input().split()
+
+
+#Creating 1D array
+arr = np.array(inp,int)
+
+print(arr[arr % 2 == 1])
+
+
+_______________________________________________Haker rank
+
+
+Find the Runner-Up Score!
+
+n=int(input())
+a=[int(i) for i in input().split()]
+new=set(a)
+new.remove(max(new))
+print(max(new))
+
+--------------------------------------------------------------------------------------------
+
+Arithmetic Operators
+
+a = int(input())
+b = int(input())
+print(a+b)
+print(a-b)
+print(a*b)
+
+-------------------------------------------------------------------------------------------
+
+sWAP cASE
+
+def swap_case(s):
+    return s.swapcase()
+
+-------------------------------------------------------------------------------------------
+
+Finding the percentage
+
+def calculate_avg(marks):
+    return sum(marks)/len(marks)
+if name ==  'main':
+    n = int(input())
+    student_marks = {}
+    for _ in range(n):
+        name, *line = input().split()
+        scores = list(map(float, line))
+        student_marks[name] = scores
+    query_name = input()
+    avg=calculate_avg(student_marks[query_name])
+    print("{:.2f}".format(avg))
+
+---------------------------------------------------------------------------------------------
+
+Designer Door Mat
+
+
+def d(n,m):
+    p=[('.|.' * (2*i+1)).center(m,'-') for i in range(n//2)]
+    w='WELCOME'.center(m,'-')
+    res='\n'.join(p+[w]+p[::-1])
+    print(res)
+if name=="main":
+    n,m=map(int,input().split())
+    d(n,m)
+
+----------------------------------------------------------------------------------------------
+
+Check Subset
+
+if name=="main":
+    T=int(input())
+    for _ in range(T):
+        n_setA=int(input())
+        setA=set(map(int,input().split()))
+        n_setB=int(input())
+        setB=set(map(int,input().split()))
+        is_subset=setA.issubset(setB)
+        print(is_subset)
+
+-----------------------------------------------------------------------------------------------
+
+Nested Lists
+
+if name ==  'main':
+    n=int(input())
+    st=[]
+    for _ in range(n):
+        name = input()
+        score = float(input())
+        st.append([name,score])
+    slg=sorted(set(score for name,score in st))[1]
+    sls=[name for name,score in sorted(st) if score==slg]
+    for s in sorted(sls):
+        print(s)
+
+----------------------------------------------------------------------------------------------
+
+Classes: Dealing with Complex Numbers
+
+
+class Complex(object):
+    def init(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
+
+    def add(self, no):
+        return Complex(self.real + no.real, self.imaginary + no.imaginary)
+
+    def sub(self, no):
+        return Complex(self.real - no.real, self.imaginary - no.imaginary)
+
+    def mul(self, no):
+        real_part = (self.real * no.real) - (self.imaginary * no.imaginary)
+        imaginary_part = (self.real * no.imaginary) + (self.imaginary * no.real)
+        return Complex(real_part, imaginary_part)
+
+    def truediv(self, no):
+        conjugate_no = Complex(no.real, -no.imaginary)
+        denominator = no * conjugate_no
+        result = self * conjugate_no
+        result.real /= denominator.real
+        result.imaginary /= denominator.real
+        return result
+
+    def mod(self):
+        return Complex(math.sqrt(self.real*2 + self.imaginary*2), 0)
+
+    def str(self):
+        if self.imaginary == 0:
+            result = "%.2f+0.00i" % (self.real)
+        elif self.real == 0:
+            if self.imaginary >= 0:
+                result = "0.00+%.2fi" % (self.imaginary)
+            else:
+                result = "0.00-%.2fi" % (abs(self.imaginary))
+        elif self.imaginary > 0:
+            result = "%.2f+%.2fi" % (self.real, self.imaginary)
+        else:
+            result = "%.2f-%.2fi" % (self.real, abs(self.imaginary))
+        return result
+
+-------------------------------------------------------------------------------------------------------------
+Zipped!
+
+def calculate_student_averages(n, m, subjects):
+    def calculate_average(marks):
+        return sum(marks) / len(marks)
+
+    # Transpose the subjects to get a list of marks for each student
+    student_marks = list(zip(*subjects))
+
+    # Calculate and return the average marks for each student
+    return [round(calculate_average(marks), 2) for marks in student_marks]
+
+# Input handling
+if name == "main":
+    n, m = map(int, input().split())
+    subjects = [list(map(float, input().split())) for _ in range(m)]
+
+    # Call the function and print the results
+    averages = calculate_student_averages(n, m, subjects)
+    for average in averages:
+        print("{:.2f}".format(average))
+---------------------------------------------------------------------------------------------------------------
+
+Check Strict Superset
+
+if name == "main":
+    main_set = set(map(int, input().split()))
+
+    num_other_sets = int(input())
+
+    is_strict_superset = True
+
+    for _ in range(num_other_sets):
+        other_set = set(map(int, input().split()))
+
+        if not main_set.issuperset(other_set):
+            is_strict_superset = False
+            break
+
+    print(is_strict_superset)
+--------------------------------------------------------------------------------------------------------------
+
+Power - Mod Power
+
+if name == "main":
+    a = int(input())
+    b = int(input())
+    m = int(input())
+
+    result_1 = pow(a, b)
+
+    result_2 = pow(a, b, m)
+
+    print(result_1)
+    print(result_2)
+------------------------------------------------------------------------------------------------------------
+
+Zeros and Ones
+
+import numpy as np
+
+if name == "main":
+    shape = tuple(map(int, input().split()))
+    zeros_array = np.zeros(shape, dtype=int)
+    ones_array = np.ones(shape, dtype=int)
+    print(zeros_array)
+    print(ones_array)
+----------------------------------------------------------------------------------------------------------
+
+
+
+Thanks a lot for sharing.Thanks, I'll check them out.Thanks a lot.
+Show quoted text
